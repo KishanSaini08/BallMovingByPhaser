@@ -64,41 +64,41 @@ function App() {
 
   }, [])
 
-  function changeBallState() {
-    if (document.visibilityState === "hidden") {
-      // Emit position and velocity when tab is hidden
-      socket.emit("position", { x: ballRef.current.x, y: ballRef.current.y, vx: ballRef.current.body.velocity.x, vy: ballRef.current.body.velocity.y });
-    }
-    if (document.visibilityState === "visible") {
-      // Listen for updates to position and velocity when tab is visible
-      socket.on("newPos", (msg) => {
-        if (msg !== null) {
-          ballRef.current.setPosition(msg.x, msg.y);
-          // If the velocity is zero, set a default velocity to prevent the ball from falling
-          const vx = msg.vx !== 0 ? msg.vx : 10;
-          const vy = msg.vy !== 0 ? msg.vy : 10;
-          ballRef.current.setVelocity(vx, vy);
-          ballTween(msg.x, msg.y);
-        }
-      })
-    }
-  }
+  // function changeBallState() {
+  //   if (document.visibilityState === "hidden") {
+  //     // Emit position and velocity when tab is hidden
+  //     socket.emit("position", { x: ballRef.current.x, y: ballRef.current.y, vx: ballRef.current.body.velocity.x, vy: ballRef.current.body.velocity.y });
+  //   }
+  //   if (document.visibilityState === "visible") {
+  //     // Listen for updates to position and velocity when tab is visible
+  //     socket.on("newPos", (msg) => {
+  //       if (msg !== null) {
+  //         ballRef.current.setPosition(msg.x, msg.y);
+  //         // If the velocity is zero, set a default velocity to prevent the ball from falling
+  //         const vx = msg.vx !== 0 ? msg.vx : 10;
+  //         const vy = msg.vy !== 0 ? msg.vy : 10;
+  //         ballRef.current.setVelocity(vx, vy);
+  //         ballTween(msg.x, msg.y);
+  //       }
+  //     })
+  //   }
+  // }
   
 
-  useEffect(() => {
-    document.addEventListener("visibilitychange", changeBallState)
+  // useEffect(() => {
+  //   document.addEventListener("visibilitychange", changeBallState)
 
-    socket.on("newPos", (msg) => {
-      if (msg !== null) {
-        ballRef.current.setPosition(msg.x, msg.y)
-        ballTween(msg.x, msg.y);
-      }
-    })
-    return () => {
-      socket.off("newPos");
-      document.removeEventListener('visibilitychange', changeBallState);
-    };
-  }, [])
+  //   socket.on("newPos", (msg) => {
+  //     if (msg !== null) {
+  //       ballRef.current.setPosition(msg.x, msg.y)
+  //       ballTween(msg.x, msg.y);
+  //     }
+  //   })
+  //   return () => {
+  //     socket.off("newPos");
+  //     document.removeEventListener('visibilitychange', changeBallState);
+  //   };
+  // }, [])
 
   socket.on("newclick", ({x , y , btn})=>{
     ballTween(x ,y)
