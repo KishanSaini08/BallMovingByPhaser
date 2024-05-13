@@ -28,7 +28,7 @@
   gap: 20rem;
   position: absolute;
   top: 0vh;
-  left: 36vw;
+  left: 30vw;
 }
 .bottom{
   display: flex;
@@ -36,8 +36,8 @@
   align-items: center;
   gap: 20rem;
   position: absolute;
-  bottom: -100vh;
-  left: 36vw;
+  bottom: -90vh;
+  left: 30vw;
 }
 
 body{
@@ -64,4 +64,10 @@ button:hover{
   background-color: #c0c0c04d;
   color: white;
   font-size: medium;
-}
+} 
+
+
+
+
+
+

@@ -1,4 +1,4 @@
 import { io } from 'socket.io-client';
 
-let socket = io("http://localhost:3000")
+let socket = io("https://phaser2backend-p1ve.onrender.com")
 export default socket
